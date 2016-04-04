@@ -60,9 +60,62 @@ public class PizzaPreferences extends AppCompatActivity {
         Intent calculatePizzaCost = new Intent(this, CostCalculator.class);
         boolean[] hasToppings = new boolean[toppings.length];
 
+
         //insert your code here
 
+        for (int i = 0; i < toppings.length ; i++) {
+            if(toppings[i].isChecked()){
+                hasToppings[i] = true;
+            }
+            else {
+                hasToppings[i] = false;
+            }
+        }
+
+        String crustSize;
+        if(rdobtnIndividual.isChecked()){
+            crustSize ="Individual";}
+        else if(rdobtnSmall.isChecked()){
+            crustSize ="Small";}
+        else if (rdobtnMedium.isChecked()){
+            crustSize ="Medium";}
+        else if(rdobtnLarge.isChecked()) {
+            crustSize ="Large";}
+        else if(rdobtnExtraLarge.isChecked()) {
+            crustSize ="Extra Large";}
+        else {
+            crustSize ="None selected";}
+        String crustType;
+        boolean Garlic = false;
+        if(rdobtnThin.isChecked()) {
+            crustType = "Thin";
+            if (chkboxGarlic.isChecked()) {
+                Garlic = true;
+            }
+        }
+        else if (rdobtnThick.isChecked()) {
+            crustType = "Thick";
+            if (chkboxGarlic.isChecked()) {
+                Garlic = true;
+            }
+        }
+        else if (rdobtnCheeseFilled.isChecked()) {
+            crustType = "Cheese";
+            if (chkboxGarlic.isChecked()) {
+                Garlic = true;
+            }
+        }
+        else {
+            crustType = "None Selected";
+            if (chkboxGarlic.isChecked()) {
+                Garlic = true;
+            }
+        }
+
         calculatePizzaCost.putExtra("TOPPINGS_BOOLEANS", hasToppings);
+        calculatePizzaCost.putExtra("SIZE_SELECTION", crustSize);
+        calculatePizzaCost.putExtra("CRUST_SELECTION", crustType);
+        calculatePizzaCost.putExtra("HAS_GARLIC_CRUST", Garlic);
         startActivityForResult(calculatePizzaCost, 0);
     }
 
